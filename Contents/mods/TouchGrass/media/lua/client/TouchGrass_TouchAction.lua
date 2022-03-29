@@ -33,12 +33,12 @@ function TouchGrassAction:perform()
 	self.character:setSecondaryHandItem(nil)
 end
 
-function TouchGrassAction:new(character, grass, time)
+function TouchGrassAction:new(character, handItem, time)
 	local o = {}
 	setmetatable(o, self)
 	self.__index = self
 	o.character = character
-	o.grass = grass
+	o.handItem = handItem;
 	o.maxTime = time
 	if o.character:isTimedActionInstant() then o.maxTime = 1 end
 	return o
