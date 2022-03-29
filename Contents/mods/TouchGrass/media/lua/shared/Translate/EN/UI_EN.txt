@@ -1,0 +1,5 @@
+UI_EN = {
+	UI_ContextMenu_WringClothing_Option = "Touch Grass"
+	UI_ContextMenu_WringClothing_Tooltip = "Allows you to touch grass"
+}
+
