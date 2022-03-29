@@ -2,7 +2,7 @@ TouchGrassCursor = ISBuildingObject:derive("TouchGrassCursor")
 
 function TouchGrassCursor:create(x, y, z, north, sprite)
 	local square = getWorld():getCell():getGridSquare(x, y, z)
-	ISWorldObjectContextMenu.doTouchGrass(self.character, square)
+	TouchGrassContextMenu.doTouchGrass(self.character, square)
 end
 
 function TouchGrassCursor:isValid(square)
