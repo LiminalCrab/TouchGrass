@@ -7,48 +7,49 @@ TouchGrass.onTouchGrass = function(worldobjects, square, player)
     ISTimedActionQueue.add(ISTouchGrassTimedAction:new(player, square))
 end
 
+
+
+
 TouchGrass.touchGrassMenu = function(player, context, worldobjects)
 
     local player = getPlayer(0)
     local square;
     local target;
 
-    if player:getVehicle() then
-        return
-    end
+    if player:getVehicle() then return end
 
-    for i, v in ipairs(worldobjects) do
+    for i,v in ipairs(worldobjects) do
         square = v:getSquare();
     end
-
-    if not square then
-        return
-    end
-
-    for i = 0, square:getObjects():size() - 1 do
-        local object = square:getObjects():get(i)
-
+  
+	if not square then return end
+     
+	for i=0,square:getObjects():size()-1 do
+		local object = square:getObjects():get(i);
+        
         if object then
-            local attached = object:getAttachedAnimSprite()
-            if attached then
-                for n = 1, attached:size() do
-                    local sprite = attached:get(n - 1)
-                    if sprite and sprite:getParentSprite() and sprite:getParentSprite():getName() and
-                        (luautils.stringStarts(sprite:getParentSprite():getName(), "blends_natural_*") or
-                            luautils.stringStarts(sprite:getParentSprite():getName(), "blends_natural_01_")) then
-                        target = sprite
-                        break
+            if object:getSprite() and luautils.stringStarts(object:getSprite():getName(), "e_newgrass_") then
+                target = object;
+            else
+                local attached = object:getAttachedAnimSprite()
+                if attached then
+                    for n=1,attached:size() do
+                        local sprite = attached:get(n-1)
+                        if sprite and sprite:getParentSprite() and sprite:getParentSprite():getName() and 
+                            (luautils.stringStarts(sprite:getParentSprite():getName(), "blends_natural_") or 
+                            luautils.stringStarts(sprite:getParentSprite():getName(), "e_newgrass_")) then
+                            target = sprite
+                            break;
+                        end
                     end
                 end
             end
         end
+	end
 
-        if not target then
-            return
-        end
+    if not target then return end
 
-        context:addOption("Touch grass ",  worldobjects, TouchGrass.touchGrassMenu, square, player);
-    end
+    context:addOption("Touch Grass ", worldobjects, TouchGrass.onTouchGrass, square, player);
 end
 
 Events.OnFillWorldObjectContextMenu.Add(TouchGrass.touchGrassMenu)
