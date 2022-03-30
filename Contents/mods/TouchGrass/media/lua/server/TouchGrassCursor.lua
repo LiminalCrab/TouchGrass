@@ -6,7 +6,7 @@ function TouchGrassCursor:create(x, y, z, north, sprite)
 end
 
 function TouchGrassCursor:isValid(square)
-	return ISWorldObjectContextMenu.canBeRemoved(self.character, square)
+	return true
 end
 
 function TouchGrassCursor:render(x, y, z, square)
