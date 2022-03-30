@@ -14,16 +14,19 @@ TouchGrass.createMenu = function(player, context, worldobjects, test)
 end
 
 
-TouchGrass.onTouchGrass = function(worldobjects, square, player)
+TouchGrass.onTouchGrass = function(player, square)
     local playerObj = getSpecificPlayer(player)
     -- local bo = TouchGrassCursor:new(playerObj, "grass") --what
     -- getCell():setDrag(bo, player);
-end
-
-TouchGrass.doTouchGrass = function(playerObj, square)
     if luautils.walkAdj(playerObj, square, true) then
         ISTimedActionQueue.add(TouchGrassAction:new(playerObj, square))
     end
+
+
+end
+
+TouchGrass.doTouchGrass = function(playerObj, square)
+    player:addLineChatElement("HOLY FUCK THIS GRASS IS SO COOL")
 end
 
 Events.OnFillWorldObjectContextMenu.Add(TouchGrass.createMenu)

@@ -31,8 +31,6 @@ function TouchGrassActions:start()
 --	getSoundManager():PlayWorldSound("bushes", self.square, 0.2, 20, 1.0, 3, true)
 	self:setActionAnim("Loot")
 	self:setOverrideHandModels(nil, nil)
-    self.square:playSound("RemovePlant");
-	addSound(self.character, self.character:getX(), self.character:getY(), self.character:getZ(), 10, 5)
 end
 
 function TouchGrassActions:stop()
@@ -42,7 +40,6 @@ end
 function TouchGrassActions:perform()
 	local sq = self.square
 	local args = { x = sq:getX(), y = sq:getY(), z = sq:getZ() }
-	player:addLineChatElement("HOLY FUCK THIS GRASS IS SO COOL")
 
 	ISBaseTimedAction.perform(self)
 end
@@ -55,7 +52,7 @@ function TouchGrassActions:new(character, square)
 	o.square = square
 	o.stopOnWalk = true
 	o.stopOnRun = true
-	o.maxTime = 5000
+	o.maxTime = 500
 	o.spriteFrame = 0
     if character:isTimedActionInstant() then
         o.maxTime = 1;
